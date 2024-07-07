@@ -265,8 +265,17 @@ function loadContents() {
                             var stacksPlayer = document.createElement('div');
                             stacksPlayer.setAttribute('class', 'custom-stacks-player');
                             stacksPlayer.innerText = getFullPlayerName(player.player_id) + " - " + player.position;
+                            var teamStacks = statsStacksChild.getElementsByClassName("custom-stacks-teamname");
+                            var mostRecentTeam = teamStacks[teamStacks.length-1];
 
-                            statsStacksChild.append(stacksPlayer);
+                            if(player.position == "QB")
+                            {
+                                mostRecentTeam.after(stacksPlayer);
+                            }
+                            else
+                            {
+                                statsStacksChild.append(stacksPlayer);
+                            }
                             
                             sameTeam = player.team;
                             count++;
@@ -417,7 +426,7 @@ function createPlayerRow(playerid, rosterid) {
     playerHeightDiv .setAttribute('class', 'custom-player-height');
     playerHeightDiv.innerText = calculateHeight(player.height);
     playerWeightDiv .setAttribute('class', 'custom-player-weight');
-    playerWeightDiv.innerText = player.weight + "lbs";
+    playerWeightDiv.innerText = player.weight + " lbs";
 
     if(playerNickName != "")
     {
