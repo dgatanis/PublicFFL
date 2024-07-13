@@ -113,9 +113,9 @@ img.custom-team-logo {
 .custom-team-container {
     text-align: center;
     font-size: larger;
-    border-bottom: 2px solid var(--custom-dark-blue);
+    border-bottom: 2px solid black;
     margin-bottom: .5rem;
-    color: var(--custom-dark-blue);
+    color: black;
 }
 
 .custom-player:hover {
