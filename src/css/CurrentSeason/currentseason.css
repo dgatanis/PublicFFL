@@ -651,6 +651,7 @@
     border-radius: 5px;
     position: relative;
     color: white;
+    height: 2rem;
   }
 
   .custom-nomatchup {
@@ -907,8 +908,16 @@
       }
     }
 
+    .custom-playoffs-label {
+      font-size: 2rem !important;
+    }
+
+    .custom-playoff-team-name {
+      font-size: smaller;
+    }
+
     .custom-xsmall-avatar {
-      max-width: 1.5rem;
+      max-width: 1.4rem;
     }
     
     .custom-playoffs-bracket, .custom-playoff-container {
