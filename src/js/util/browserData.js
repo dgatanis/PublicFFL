@@ -22,7 +22,11 @@ async function setBrowserData() {
         if(!localStorage.getItem("expiration") || currentExp < now)
         {
             localStorage.clear();
+            sessionStorage.clear();
             localStorage.setItem("expiration", expiration);
+            setMatchupData(currentLeagueId,currentWeek);
+            setAllTimeMatchupData();
+            //setMatchupData('1003692635549462528','10');
             setPlayerData();
             setATLeagueIds();
             setRosterData(currentLeagueId);
@@ -32,13 +36,38 @@ async function setBrowserData() {
             setPlayoffsData(currentLeagueId);
             //setPlayoffsData('998356266604916736');
         }
-        if(!sessionStorage.getItem("MatchupData") || currentExp < now)
+        if(!sessionStorage.getItem("MatchupData"))
         {
-            sessionStorage.clear();
             setMatchupData(currentLeagueId,currentWeek);
-            //setMatchupData('1003692635549462528','10');
         }
-
+        if(!sessionStorage.getItem("ATMatchupData"))
+        {
+            setAllTimeMatchupData();
+        }
+        if(!localStorage.getItem("PlayerData"))
+        {
+            setPlayerData();
+        }
+        if(!localStorage.getItem("ATLeagueIds"))
+        {
+            setATLeagueIds();
+        }
+        if(!localStorage.getItem("RosterData"))
+        {
+            setRosterData(currentLeagueId);
+        }
+        if(!localStorage.getItem("UserData"))
+        {
+            setUserData(currentLeagueId);
+        }
+        if(!localStorage.getItem("LeagueData"))
+        {
+            setLeagueDetails(currentLeagueId);
+        }
+        if(!localStorage.getItem("PlayoffData"))
+        {
+            setPlayoffsData(currentLeagueId);
+        }
     }
     catch(error){
         console.error(`Error: ${error.message}`);
@@ -250,5 +279,60 @@ async function setMatchupData(leagueID, currentWeek) {
     {
         console.error(`Error: ${error.message}`);
     }
+
+}
+
+async function setAllTimeMatchupData() {
+    try{
+        var thisYear = await getCurrentSeason();
+        const currentLeagueId = await leagueInfo.default();
+        var lastLeagueId = currentLeagueId;
+        let matchupWeeks = [];
+        let allTimeMatchups = [];
+
+        while(lastLeagueId != 0 && lastLeagueId != null)
+        {
+            for(let i = 0; i<=18; i++)
+            {
+                const matchup = await fetch(`https://api.sleeper.app/v1/league/${lastLeagueId}/matchups/${i}`);
+                const matchupData = await matchup.json();
+                let matchupsArray = [];
+
+                if(matchupData)
+                {
+                    for(let matchups of matchupData)
+                    {
+                        if(matchups)
+                        {
+                            matchupsArray.push({
+                                ...matchups
+                            });
+                        }
+                    }
+                    matchupWeeks.push({
+                        ...matchupsArray
+                        ,"year": thisYear.toString()
+                        ,"week": i
+                    });
+    
+    
+                }
+            }
+            thisYear = thisYear - 1;
+            lastLeagueId = await previousLeagueId(lastLeagueId);
+            
+        }
+
+        allTimeMatchups.push({
+            matchupWeeks
+        });
+
+        sessionStorage.setItem("ATMatchupData", JSON.stringify(allTimeMatchups));
+
+    }
+    catch (error){
+        console.error(`Error: ${error.message}`);
+    }
+    
 
 }
