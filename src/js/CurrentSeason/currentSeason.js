@@ -153,7 +153,6 @@ function loadSeasonRankings() {
 
             rosterButton.setAttribute("onclick", "OpenTeamRosterModal(" + user.user_id + ", '" + teamNameDisplay + "')");
 
-            rosterButton.setAttribute('title', 'Look at their wack ass lineup.');
             rank++;
 
         }
