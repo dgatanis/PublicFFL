@@ -5,16 +5,8 @@ var userData = users;
 export function createOwnerAvatarImage(userId, page = null) { 
 
     let user = userData.find(x => x.user_id === userId);
-    const avatarURL = user.metadata.avatar;
     
-    if(avatarURL)
-    {
-        var img = document.createElement("img");
-        img.setAttribute('src', avatarURL);
-        img.setAttribute('class', "custom-medium-avatar");
-        img.setAttribute('data-userid', user.user_id);
-    }
-    else if (user.avatar)
+    if (user.avatar)
     {
         const altURL = "https://sleepercdn.com/avatars/thumbs/" + user.avatar;
         var img = document.createElement("img");
@@ -48,7 +40,7 @@ export function getTeamName(userid) {
 
     if(user)
     {
-        userName = "Team_"+ user.owner_id;
+        userName = "Team_"+ user.roster_id;
     }
     else
     {
