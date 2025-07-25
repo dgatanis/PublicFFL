@@ -1,9 +1,12 @@
-function openRostersPage(rosterid) {
-    var newURL = new URL('https://dgatanis.github.io/PublicFFL/web/Rosters.html');
+
+async function openRostersPage(rosterid) {
+    const leagueInfo = await import('../util/leagueInfo.js');
+    var relativePath = './web/Rosters.html'
+    var newURL = new URL(relativePath, leagueInfo.getLeagueURL());
+
     newURL.searchParams.append('callFunction', 'openRoster');
     newURL.searchParams.append('rosterId', rosterid);
 
-    history.pushState({}, '', newURL);
-    window.location.href = newURL;
+    window.open(newURL.href,'_blank');
     return;
 }

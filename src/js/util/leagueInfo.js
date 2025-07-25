@@ -52,6 +52,7 @@ export async function getPlayoffsData(leagueId) {
    return data;
 }
 
+
 async function currentLeagueId(thisYear) {
     const myUserId = leagueUser;
     const leagueName = leagueDisplayName;
@@ -102,6 +103,15 @@ export async function setLinkSource(elementId, userID1 = null, userID2 = null) {
         element.setAttribute('href', `https://keeptradecut.com/`)
     }
     
+}
+
+export function getLeagueURL() {
+    const leagueURL = 'https://dgatanis.github.io/PublicFFL';
+    let baseURL = new URL(leagueURL);
+    if (!baseURL.pathname.endsWith('/')) {
+        baseURL.pathname += '/';  // Ensure the trailing slash
+    }
+    return baseURL;
 }
 
 export function getRandomString() {
