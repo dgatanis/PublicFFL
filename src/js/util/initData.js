@@ -51,7 +51,9 @@ async function initUserData() {
             const dataRes = await waitForLocalStorageItem("UserData");
 
             var data = JSON.parse(dataRes);
-
+            data.forEach(element => {
+                element.metadata.team_name = "";
+            });
             return data;
 
         } catch (error) {

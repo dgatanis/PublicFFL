@@ -93,7 +93,9 @@ async function setRosterData(leagueID){
     {
         const rosterResponse = await fetch(`https://api.sleeper.app/v1/league/${leagueID}/rosters`);
         const rosterData = await rosterResponse.json();
-
+        rosterData.forEach(element => {
+                element.metadata = {};
+        });
         localStorage.setItem("RosterData", JSON.stringify(rosterData));
         return rosterData;
     }
@@ -233,6 +235,9 @@ async function setUserData(leagueID){
     try {
         const res = await fetch(`https://api.sleeper.app/v1/league/${leagueID}/users`);
         const data = await res.json();
+        data.forEach(element => {
+                element.metadata["team_name"] = "";
+        });
         localStorage.setItem("UserData", JSON.stringify(data));
     }
     catch (error) {
