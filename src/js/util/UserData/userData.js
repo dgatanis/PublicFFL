@@ -35,36 +35,46 @@ export function createOwnerAvatarImage(userId, page = null) {
 
 export function getTeamName(userid) {
 
-    let user = rosters.find(x => x.owner_id === userid.toString());
+    let user = userData.find(x => x.user_id === userid.toString());
     let userName = "";
 
-    if(user)
+    if(user.metadata.team_name != undefined)
     {
-        userName = "Team_"+ user.roster_id;
+        userName = user.metadata.team_name;
     }
     else
     {
-        userName = "Team_Test"
+        userName = user.display_name;
     }
 
     return userName.toString();
 }
 
 export function getUserByName(teamName) {
-    let userId = teamName.toString().substring(teamName.toString().indexOf("_") + 1);
-    if(userId)
+    let userId = "";
+
+    for(let i = 0; i < userData.length; i++)
     {
-        return userId.toString();
-    }
-    else
-    {
-        return "";
+        if(userData[i].metadata.team_name != undefined)
+        {
+            if(userData[i].metadata.team_name.toString().trim() == teamName.toString().trim())
+            {
+                return userData[i].user_id.toString();
+            }
+        }
+        else
+        {
+            if(userData[i].display_name.toString().trim() == teamName.toString().trim())
+            {
+                return userData[i].user_id.toString();
+            }
+        }
     }
 }
 
 export function getRosterByUserId(userId) {
 
     let roster = rosters.find(x => x.owner_id === userId.toString());
-
+    debugger;
     return roster.roster_id;
 }

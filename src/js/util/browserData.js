@@ -93,7 +93,9 @@ async function setRosterData(leagueID){
     {
         const rosterResponse = await fetch(`https://api.sleeper.app/v1/league/${leagueID}/rosters`);
         const rosterData = await rosterResponse.json();
-
+        rosterData.forEach(element => {
+                element.metadata = {};
+        });
         localStorage.setItem("RosterData", JSON.stringify(rosterData));
         return rosterData;
     }
@@ -233,6 +235,14 @@ async function setUserData(leagueID){
     try {
         const res = await fetch(`https://api.sleeper.app/v1/league/${leagueID}/users`);
         const data = await res.json();
+        data.forEach(element => {
+                element.metadata["team_name"] = "";
+        });
+
+        for(let i=0; i<data.length; i++)
+        {
+            data[i].metadata["team_name"] = "Team_"+(i+1);
+        }
         localStorage.setItem("UserData", JSON.stringify(data));
     }
     catch (error) {
@@ -244,7 +254,7 @@ async function setLeagueDetails(leagueID) {
     try {
         const leagueData = await fetch(`https://api.sleeper.app/v1/league/${leagueID}`);
         const league = await leagueData.json();
-
+        league.name = "";
         localStorage.setItem("LeagueData", JSON.stringify(league));
     }
     catch (error) {
