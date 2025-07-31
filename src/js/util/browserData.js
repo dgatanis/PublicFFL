@@ -238,6 +238,11 @@ async function setUserData(leagueID){
         data.forEach(element => {
                 element.metadata["team_name"] = "";
         });
+
+        for(let i=0; i<data.length; i++)
+        {
+            data[i].metadata["team_name"] = "Team_"+(i+1);
+        }
         localStorage.setItem("UserData", JSON.stringify(data));
     }
     catch (error) {
@@ -249,7 +254,7 @@ async function setLeagueDetails(leagueID) {
     try {
         const leagueData = await fetch(`https://api.sleeper.app/v1/league/${leagueID}`);
         const league = await leagueData.json();
-
+        league.name = "";
         localStorage.setItem("LeagueData", JSON.stringify(league));
     }
     catch (error) {
