@@ -191,6 +191,7 @@ function loadBankroll(week, dues, weeklyWinnerPayout) {
 
         //Iterate through each row in the table and add team to each row
         for (let i = 0; i < rosterBankrolls.length; i++) {
+            // console.log(rosterBankrolls)
             let row = document.getElementById("bankrollTeam_" + i);
             let rowTeam = row.getElementsByTagName('th');
             let rowBankRoll = row.getElementsByTagName('td');
@@ -556,7 +557,8 @@ function getHighScorerCount(week) {
 
     for (let i = 0; i < thisWeek; i++) {
         let matchups = matchupData[0].matchupWeeks[i];
-        if (matchups[0]) {
+
+        if (matchups[0] && matchups[0].points > 0) {
             let highScorer = getRosterHighScorerWeek(matchups);
             if (highScorer.points > 0) {
                 rosterHighScorers.push({
@@ -570,7 +572,6 @@ function getHighScorerCount(week) {
                     "wk_won": i + 0
                 });
             }
-
     }
 
     }
