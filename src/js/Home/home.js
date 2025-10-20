@@ -3,7 +3,6 @@ import {
     createOwnerAvatarImage, 
     getTeamName,
     playoffs,
-    leagueDisplayName,
     leagueDescription,
     setLeagueName,
     setLinkSource,

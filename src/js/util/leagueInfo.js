@@ -1,6 +1,4 @@
-export const leagueDisplayName = "Crush Cities ";
 export const dues = 200; 
-export const leagueUser = '467550885086490624';
 export const dynasty = true; 
 export const weeklyWinner = 35; //Amount won for highest weekly scorer
 export const inauguralSeason = 2024; //year league began in Sleeper
@@ -54,21 +52,7 @@ export async function getPlayoffsData(leagueId) {
 
 
 async function currentLeagueId(thisYear) {
-    const myUserId = leagueUser;
-    const leagueName = leagueDisplayName;
-    const userLeagues = await fetch(`https://api.sleeper.app/v1/user/${myUserId}/leagues/nfl/${thisYear}`);
-    const leagueData = await userLeagues.json();
-
-    const leagues = leagueData.map((league) => league);
-    
-    for(let league of leagues)
-    {
-        if(league.name === leagueName)
-        {
-            let thisLeagueId = league.league_id;
-            return thisLeagueId;
-        }
-    }
+    return "1186493407559684096"
 }
 
 async function getNFLState() {
