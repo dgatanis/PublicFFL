@@ -15,7 +15,6 @@ import {
     setLeagueName,
     inauguralSeason,
     setLinkSource,
-    leagueDisplayName,
     removeSpinner,
     setDarkMode
 } from '../util/helper.js';
