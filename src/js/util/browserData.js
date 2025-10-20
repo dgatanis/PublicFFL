@@ -1,5 +1,5 @@
 //Sets the browser data needed for other scripts
-import { getCurrentWeek, getCurrentSeason, inauguralSeason, leagueDisplayName, leagueUser } from './leagueInfo.js';
+import { getCurrentWeek, getCurrentSeason } from './leagueInfo.js';
 const leagueInfo = await import('./leagueInfo.js');
 
 try{
