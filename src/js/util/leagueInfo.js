@@ -52,7 +52,7 @@ export async function getPlayoffsData(leagueId) {
 
 
 async function currentLeagueId(thisYear) {
-    return "1186493407559684096"
+    return "1312513430732689408"
 }
 
 async function getNFLState() {
