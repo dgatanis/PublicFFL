@@ -494,6 +494,10 @@ button#custom-team-selector-input {
 /*Tablet display styling*/
 @media screen and (max-width: 48rem) {
 
+    .custom-player-details {
+        height: 100%;
+    }
+
     .custom-team-group {
         height: revert;
     }
@@ -545,7 +549,7 @@ button#custom-team-selector-input {
     }
 
     .custom-player-details {
-        height: fit-content;
+        height: revert;
         margin-left: 35px;
     }
 
